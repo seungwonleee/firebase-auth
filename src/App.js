@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Routes from "./Routes/Routes";
+import { authService } from "./fire_module/fireMain";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleLoginState } from "./features/auth/authSlice";
 
-function App() {
+const App = () => {
+  const state = useSelector((state) => state.auth.isloggedIn);
+  const dispatch = useDispatch();
+  console.log(state);
+
+  // 로그인 Auth 변경 감지
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      {
+        user && dispatch(toggleLoginState());
+      }
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes />
     </div>
   );
-}
+};
 
 export default App;
