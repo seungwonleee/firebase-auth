@@ -1,0 +1,21 @@
+/* Navbar 메뉴 공통 Font */
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap");
+
+.Menu-Font {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+/* LeftMenu Logo 전용 Font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap");
+
+/* Logo 글자 폰트 설정 */
+.Logo-Font {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Logo 아이콘 설정 */
+.Logo-Icon {
+  color: green;
+  /* TODO 왜 font-size가 inline으로 작성시에만 적용되는지 확인하기 */
+  /* font-size: 50px; */
+}

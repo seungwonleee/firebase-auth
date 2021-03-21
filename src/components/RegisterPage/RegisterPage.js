@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { authService } from "../fire_module/fireMain";
+import { authService } from "../../fire_module/fireMain";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const RegisterPage = () => {
   let history = useHistory();
   const isloggedIn = useSelector((state) => state.auth.isloggedIn);
+
+  // 로그인한 유저는 해당 페이지에 접근하지 못하도록 Redirect
+  if (isloggedIn) {
+    history.push("/");
+  }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,31 +29,35 @@ const Login = () => {
     }
   };
 
-  const handleLogin = async (event) => {
+  //회원가입하기 ( 회원가입 성공하면 바로 로그인된다. )
+  const handleCreateAccount = async (event) => {
     event.preventDefault();
 
     await authService
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        // 로그인 성공
+        // 회원가입 및 로그인 성공
         if (user.operationType === "signIn") {
-          alert("로그인 성공! 환영합니다.");
+          alert("회원가입을 축하합니다. 환영합니다.");
         }
-        // 홈으로 이동
+        // LandingPage로 이동
         history.push("/");
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        let errorCode = error.code;
+        let errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        if (errorCode === "auth/email-already-in-use") {
+          alert("이미 회원가입된 이메일 입니다.");
+        }
       });
   };
 
   return (
     <>
-      <h2>로그인 페이지</h2>
-      <form onSubmit={handleLogin}>
+      <h2>회원가입 페이지</h2>
+      <form onSubmit={handleCreateAccount}>
         이메일:
         <input
           type="email"
@@ -65,11 +74,10 @@ const Login = () => {
           onChange={handleInput}
           required
         />
-        <button>로그인</button>
-        {isloggedIn ? <h2>로그인 O</h2> : <h2>로그인 X</h2>}
+        <button>회원가입</button>
       </form>
     </>
   );
 };
 
-export default Login;
+export default RegisterPage;

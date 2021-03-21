@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { authService } from "../fire_module/fireMain";
+import { authService } from "../../fire_module/fireMain";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-const Register = () => {
+const LoginPage = () => {
   let history = useHistory();
   const isloggedIn = useSelector((state) => state.auth.isloggedIn);
+
+  // 로그인한 유저는 해당 페이지에 접근하지 못하도록 Redirect
+  if (isloggedIn) {
+    history.push("/");
+  }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,33 +29,31 @@ const Register = () => {
     }
   };
 
-  const handleCreateAccount = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     await authService
-      .createUserWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        // 회원가입 및 로그인 성공
+        // 로그인 성공
         if (user.operationType === "signIn") {
-          alert("회원가입을 축하합니다. 환영합니다.");
+          alert("로그인 성공! 환영합니다.");
         }
         // 홈으로 이동
         history.push("/");
       })
       .catch((error) => {
-        let errorCode = error.code;
-        let errorMessage = error.message;
+        var errorCode = error.code;
+        var errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
-        if (errorCode === "auth/email-already-in-use") {
-          alert("이미 회원가입된 이메일 입니다.");
-        }
       });
   };
+
   return (
     <>
-      <h2>회원가입 페이지</h2>
-      <form onSubmit={handleCreateAccount}>
+      <h2>로그인 페이지</h2>
+      <form onSubmit={handleLogin}>
         이메일:
         <input
           type="email"
@@ -67,11 +70,10 @@ const Register = () => {
           onChange={handleInput}
           required
         />
-        <button>회원가입</button>
+        <button>로그인</button>
       </form>
-      {isloggedIn ? <h2>로그인 O</h2> : <h2>로그인 X</h2>}
     </>
   );
 };
 
-export default Register;
+export default LoginPage;
