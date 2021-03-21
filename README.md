@@ -1,6 +1,4 @@
-##설정 방법
-
----
+설정 방법
 
 1. fire_module 디렉토리에 fireMain.js 파일 생성
 
