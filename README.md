@@ -8,6 +8,15 @@
 
 3. SDK 스크립트 복사 붙여 넣기 후 export default firebaseConfig; 작성
 
-4. npm install 하여 dependencies 설치하기
+4. $ npm install 하여 dependencies 설치하기
 
 5. 프로젝트 실행
+
+## 기능
+
+---
+
+1. Auth (인증)
+2. Social 로그인
+3. 로그인, 회원가입
+4. 반응형 템플릿
