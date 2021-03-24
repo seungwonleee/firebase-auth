@@ -1,7 +1,5 @@
 ## 사용 방법
 
----
-
 1. src/fire_module 디렉토리에 fireSDK.js 생성
 
 2. firebase 프로젝트 설정에서 SDK 스크립트를 복사해서 fireSDK.js 에 복사 붙여 넣기
@@ -13,8 +11,6 @@
 5. 프로젝트 실행
 
 ## 기능
-
----
 
 1. Auth (인증)
 2. Social 로그인
