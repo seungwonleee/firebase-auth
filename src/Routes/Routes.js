@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+// 모든 페이지 imports
 import NavBar from "../components/NavBar/NavBar";
 import LandingPage from "../components/LandingPage/LandingPage";
 import AboutPage from "../components/AboutPage/AboutPage";
@@ -7,33 +9,19 @@ import RegisterPage from "../components/RegisterPage/RegisterPage";
 import LoginPage from "../components/LoginPage/LoginPage";
 import MyPage from "../components/MyPage/MyPage";
 import Footer from "../components/Footer/Footer";
-import styled from "styled-components";
-
+import FindAccountPage from "../components/FindAccountPage/FindAccountPage";
 // styled-components
-const HeaderSection = styled.header`
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #dedede;
-  position: fixed;
-  width: 100%;
-`;
-
 const MainSection = styled.section`
   background: #f7f7f7;
   padding-top: 55px;
 `;
 
-const FooterSection = styled.footer`
-  background: orange;
-`;
-
 const Routes = () => {
   return (
     <Router>
-      <HeaderSection>
+      <header>
         <NavBar />
-      </HeaderSection>
+      </header>
       <MainSection>
         <Switch>
           <Route exact path="/" component={LandingPage} />
@@ -41,11 +29,12 @@ const Routes = () => {
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/mypage" component={MyPage} />
+          <Route exact path="/findaccount" component={FindAccountPage} />
         </Switch>
       </MainSection>
-      <FooterSection>
+      <footer>
         <Footer />
-      </FooterSection>
+      </footer>
     </Router>
   );
 };

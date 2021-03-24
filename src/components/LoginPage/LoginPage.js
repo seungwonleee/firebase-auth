@@ -1,14 +1,51 @@
 import React, { useState } from "react";
 import { authService } from "../../fire_module/fireMain";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+//Material UI 로그인 Form 관련 Imports
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+
+// Materaul UI 로그인 Form Design
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 const LoginPage = () => {
-  let history = useHistory();
-  const isloggedIn = useSelector((state) => state.auth.isloggedIn);
+  // Materail Ui 디자인에 사용
+  const classes = useStyles();
+
+  //redux로 로그인 상태 체크
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   // 로그인한 유저는 해당 페이지에 접근하지 못하도록 Redirect
-  if (isloggedIn) {
+  let history = useHistory();
+  if (isLoggedIn) {
     history.push("/");
   }
 
@@ -43,35 +80,95 @@ const LoginPage = () => {
         history.push("/");
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        let errorCode = error.code;
+        let errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        // firebase auth 오류 처리
+        switch (errorCode) {
+          case "auth/invalid-email":
+            alert("유효하지 않은 이메일 입니다.");
+            break;
+          case "auth/user-disabled":
+            alert("사용이 불가능한 계정 입니다.");
+            break;
+          case "auth/user-not-found":
+            alert("없는 사용자 입니다.");
+            break;
+          case "auth/wrong-password":
+            alert("비밀번호가 틀렸습니다.");
+            break;
+        }
       });
   };
 
   return (
     <>
-      <h2>로그인 페이지</h2>
-      <form onSubmit={handleLogin}>
-        이메일:
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleInput}
-          required
-        />
-        비밀번호:
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleInput}
-          required
-        />
-        <button>로그인</button>
-      </form>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Check Charging
+          </Typography>
+          <Typography>(로그인)</Typography>
+          <form className={classes.form} onSubmit={handleLogin}>
+            <TextField
+              type="email"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="email"
+              label="Email"
+              id="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={handleInput}
+            />
+
+            <TextField
+              type="password"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={handleInput}
+            />
+
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="아이디 저장"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              로그인
+            </Button>
+          </form>
+          <Grid container>
+            <Grid item xs>
+              {/* TODO 비밀번호 찾기 페이지 만들기 */}
+              <Link to="/findaccount">비밀번호 찾기</Link>
+            </Grid>
+            <Grid item>
+              <Link to="/register">회원가입</Link>
+            </Grid>
+          </Grid>
+        </div>
+      </Container>
     </>
   );
 };

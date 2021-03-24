@@ -27,6 +27,15 @@ const CenterMenu = () => {
       <Item>
         <StyledLink to="/about">About</StyledLink>
       </Item>
+      <Item>
+        <StyledLink to="/">menu1</StyledLink>
+      </Item>
+      <Item>
+        <StyledLink to="/">menu2</StyledLink>
+      </Item>
+      <Item>
+        <StyledLink to="/">menu3</StyledLink>
+      </Item>
     </List>
   );
 };

@@ -4,11 +4,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isloggedIn: false,
+    isLoggedIn: false,
   },
   reducers: {
     toggleLoginState: (state) => {
-      state.isloggedIn = !state.isloggedIn;
+      state.isLoggedIn = !state.isLoggedIn;
     },
 
     // toggleState: (state, action) => {

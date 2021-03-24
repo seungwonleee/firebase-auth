@@ -9,9 +9,6 @@ const List = styled.ul`
   display: flex;
   list-style: none;
   align-items: center;
-  //TODO 전체에 margin, padding 0px 적용할 경우 수정해야 되는지 확인하기
-  margin: 0px;
-  padding: 0px;
   padding-left: 1rem;
 `;
 

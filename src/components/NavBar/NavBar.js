@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 import LeftMenu from "./Sections/LeftMenu";
 import CenterMenu from "./Sections/CenterMenu";
 import RightMenu from "./Sections/RightMenu";
+import DrawerButton from "./DrawerButton";
 
 // styled-components
 const Navbar = styled.nav`
@@ -10,14 +12,39 @@ const Navbar = styled.nav`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  border-bottom: 1px solid #dedede;
+  position: fixed;
+  background: #ffffff;
 `;
 
+// const breakpoints = {
+//   desktop: "(min-width: 1025px)",
+//   tablet: "(min-width: 768px) and (max-width: 1024px)",
+//   phone: "(max-width: 767px)",
+// };
+
 const NavBar = () => {
+  const breakPoint = useMediaQuery({
+    query: "(min-width:768px)",
+  });
+
   return (
     <Navbar>
+      {/* 로고 메뉴 */}
       <LeftMenu />
-      <CenterMenu />
-      <RightMenu />
+
+      {/* 중간 메뉴 */}
+      {breakPoint ? (
+        <>
+          <CenterMenu />
+          <RightMenu />
+        </>
+      ) : (
+        <></>
+      )}
+
+      {/* Drawer 버튼 */}
+      {breakPoint ? <></> : <DrawerButton />}
     </Navbar>
   );
 };

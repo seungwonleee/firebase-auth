@@ -22,19 +22,19 @@ const StyledLink = styled(Link)`
 `;
 
 const RightMenu = () => {
-  const isloggedIn = useSelector((state) => state.auth.isloggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   let history = useHistory();
 
   // 로그아웃하기
   const handleLogout = () => {
     authService.signOut();
     history.push("/");
-    // TODO 새로고침을 하지않으면 메뉴가 안바뀜 / indexdDB 저장내용은 삭제됨 / reload 만이 정답인지 찾아보기
+    // TODO 새로고침을 하지않으면 Auth 상태에 따른 메뉴가 바뀌지 않음 / indexdDB 저장내용은 삭제됨 / reload 만이 정답인지 찾아보기
     window.location.reload(true);
   };
   return (
     <>
-      {isloggedIn ? (
+      {isLoggedIn ? (
         // 로그인했을 때 메뉴
         <List className="Menu-Font">
           <Item>

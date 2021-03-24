@@ -11,11 +11,15 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
     margin:0;
   }
+  a {
+    text-decoration:none;
+    color: #3F51B5;
+  }
 
 `;
 
 const App = () => {
-  const state = useSelector((state) => state.auth.isloggedIn);
+  const state = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   console.log("로그인 상태 => ", state);
 
