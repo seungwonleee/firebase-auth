@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { authService } from "../../fire_module/fireMain";
+import { authService, firebaseInstance } from "../../fire_module/fireMain";
 import { useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import styled from "styled-components";
 //Material UI 로그인 Form 관련 Imports
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -14,6 +15,25 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+//Font Awesome 관련 Imports
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+
+const SocialLogin = styled.div`
+  display: flex;
+`;
+
+const GoogleLogin = styled.button`
+  padding: 1rem;
+  border: none;
+  background: #f7f7f7;
+`;
+
+const GithubLogin = styled.button`
+  padding: 1rem;
+  border: none;
+  background: #f7f7f7;
+`;
 
 // Materaul UI 로그인 Form Design
 const useStyles = makeStyles((theme) => ({
@@ -102,6 +122,30 @@ const LoginPage = () => {
       });
   };
 
+  //Social 로그인 (Google, Github)
+  const onSocialClick = async (event) => {
+    // console.log(event.currentTarget.name);
+    // const {
+    //   currentTarget: { name },
+    // } = event;
+
+    const { name } = event.currentTarget;
+
+    let provider;
+
+    switch (name) {
+      case "google":
+        provider = new firebaseInstance.auth.GoogleAuthProvider();
+        break;
+      case "github":
+        provider = new firebaseInstance.auth.GithubAuthProvider();
+        break;
+    }
+
+    const data = await authService.signInWithPopup(provider);
+    console.log(data);
+  };
+
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -148,6 +192,7 @@ const LoginPage = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="아이디 저장"
             />
+
             <Button
               type="submit"
               fullWidth
@@ -167,6 +212,16 @@ const LoginPage = () => {
               <Link to="/register">회원가입</Link>
             </Grid>
           </Grid>
+          <br />
+          <h4>소셜 로그인</h4>
+          <SocialLogin>
+            <GoogleLogin name="google" onClick={onSocialClick}>
+              <FontAwesomeIcon icon={faGoogle} size="2x" />
+            </GoogleLogin>
+            <GithubLogin name="github" onClick={onSocialClick}>
+              <FontAwesomeIcon icon={faGithub} size="2x" />
+            </GithubLogin>
+          </SocialLogin>
         </div>
       </Container>
     </>

@@ -14,4 +14,7 @@ const firebaseConfig = fireSDK;
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Social 로그인
+export const firebaseInstance = firebase;
+
 export const authService = firebase.auth();
