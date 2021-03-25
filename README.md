@@ -1,3 +1,10 @@
+## 기능
+
+1. Auth (인증)
+2. Social 로그인 (Google, Github)
+3. 로그인, 회원가입, 비밀번호 찾기
+4. 반응형 템플릿
+
 ## 사용 방법
 
 1. src/fire_module 디렉토리에 fireSDK.js 생성
@@ -9,10 +16,3 @@
 4. $ npm install 하여 dependencies 설치하기
 
 5. 프로젝트 실행
-
-## 기능
-
-1. Auth (인증)
-2. Social 로그인
-3. 로그인, 회원가입
-4. 반응형 템플릿
