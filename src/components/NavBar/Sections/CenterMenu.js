@@ -10,32 +10,33 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-  padding-right: 1rem;
+  padding: ${(props) => props.theme.paddings.xlarge};
+  font-size: ${(props) => props.theme.fontSizes.small};
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: black;
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const CenterMenu = () => {
   return (
     <List className="Menu-Font">
-      <Item>
-        <StyledLink to="/">Home</StyledLink>
-      </Item>
-      <Item>
-        <StyledLink to="/about">About</StyledLink>
-      </Item>
-      <Item>
-        <StyledLink to="/">menu1</StyledLink>
-      </Item>
-      <Item>
-        <StyledLink to="/">menu2</StyledLink>
-      </Item>
-      <Item>
-        <StyledLink to="/">menu3</StyledLink>
-      </Item>
+      <StyledLink to="/">
+        <Item>Home</Item>
+      </StyledLink>
+      <StyledLink to="/about">
+        <Item>About</Item>
+      </StyledLink>
+      <StyledLink to="/">
+        <Item>menu1</Item>
+      </StyledLink>
+      <StyledLink to="/">
+        <Item>menu2</Item>
+      </StyledLink>
+      <StyledLink to="/">
+        <Item>menu3</Item>
+      </StyledLink>
     </List>
   );
 };

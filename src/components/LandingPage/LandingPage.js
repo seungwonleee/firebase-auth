@@ -1,10 +1,18 @@
 import React from "react";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  font-size: ${(props) => props.theme.fontSizes.titleSize};
+`;
+const P = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.base};
+`;
 
 const LandingPage = () => {
   return (
-    <div style={{ background: "yellow" }}>
-      <h2 style={{ padding: "10px" }}>여기는 LandingPage 페이지 입니다.</h2>
-      <p>
+    <div>
+      <Title>여기는 LandingPage 페이지 입니다.</Title>
+      <P>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
         porro officia corrupti nihil dignissimos autem eos, iusto repellendus
         modi corporis temporibus a ea. Soluta beatae, eos quis saepe eum
@@ -62,10 +70,10 @@ const LandingPage = () => {
         illo officia. At, voluptatem explicabo. Maiores placeat amet cupiditate,
         suscipit natus tenetur ipsum, incidunt, consequuntur veniam nisi alias
         deserunt?
-      </p>
+      </P>
 
       <hr />
-      <p>
+      <P>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis impedit
         porro dolorem, nihil suscipit quos blanditiis, nemo soluta debitis
         assumenda dignissimos nulla optio voluptate eos! Aspernatur voluptatem
@@ -111,9 +119,9 @@ const LandingPage = () => {
         ut accusamus sed rem consequatur molestiae? Recusandae quia, et
         assumenda, rerum rem laudantium laborum pariatur voluptatum illo,
         consequuntur ipsa!
-      </p>
+      </P>
       <hr />
-      <p>
+      <P>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
         consectetur adipisci tenetur numquam vitae eum iusto quae alias sunt?
         Delectus, velit sed libero commodi facere molestiae eos accusamus,
@@ -223,7 +231,7 @@ const LandingPage = () => {
         blanditiis ipsum earum assumenda eveniet? Earum corporis, sit neque
         molestias debitis minima ab cum exercitationem consequatur ipsa
         asperiores, eum eligendi. Vero reiciendis illo at commodi!
-      </p>
+      </P>
     </div>
   );
 };

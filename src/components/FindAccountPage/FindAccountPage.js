@@ -3,7 +3,6 @@ import { authService } from "../../fire_module/fireMain";
 import { useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 //Material UI 로그인 Form 관련 Imports
-
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -15,10 +14,11 @@ import Container from "@material-ui/core/Container";
 // Materaul UI 회원가입 Form Design
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    height: "80vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -31,8 +31,14 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  title: {
+    fontSize: "3.4rem",
+  },
+  text: {
+    fontSize: "1.6rem",
+  },
 }));
-//TODO 오류 발생하므로 코드 수정하기
+//TODO 오류 코드 수정하기
 const FindAccountPage = () => {
   //redux로 로그인 상태 체크
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -90,20 +96,20 @@ const FindAccountPage = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" className={classes.title}>
           Check Charging
         </Typography>
         <br />
-        <Typography>(계정 찾기)</Typography>
+        <Typography className={classes.text}>(계정 찾기)</Typography>
         <br />
-        <Typography>
+        <Typography className={classes.text}>
           작성하신 이메일로 로그인 가능한 링크를 보내드립니다.
         </Typography>
-        {/* <form className={classes.form} onSubmit={handleCreateAccount}> */}
         <form className={classes.form} onSubmit={handleFindAccount}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                type="email"
                 variant="outlined"
                 required
                 fullWidth
@@ -114,6 +120,8 @@ const FindAccountPage = () => {
                 autoFocus
                 value={email}
                 onChange={handleInput}
+                inputProps={{ className: classes.text }} // font size of input text
+                InputLabelProps={{ className: classes.text }} // font size of input label
               />
             </Grid>
           </Grid>
@@ -124,11 +132,11 @@ const FindAccountPage = () => {
             color="primary"
             className={classes.submit}
           >
-            계정 찾기
+            <span className={classes.text}>계정 찾기</span>
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/login" variant="body2">
+              <Link to="/login" variant="body2" className={classes.text}>
                 이미 계정이 있으신가요? 로그인 하기
               </Link>
             </Grid>

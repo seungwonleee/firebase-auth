@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { authService } from "../../fire_module/fireMain";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 // Drawer 관련 Import
 import clsx from "clsx";
@@ -13,6 +13,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 
+//Material UI 관련코드
 const useStyles = makeStyles({
   list: {
     width: 200,
@@ -20,7 +21,11 @@ const useStyles = makeStyles({
   fullList: {
     width: "auto",
   },
+  listItemText: {
+    fontSize: "1.6rem", //Insert your required size
+  },
 });
+
 const DrawerButton = () => {
   //Material UI 관련코드
   const classes = useStyles();
@@ -84,7 +89,10 @@ const DrawerButton = () => {
           const { text, onClick } = item;
           return (
             <ListItem button key={text} onClick={onClick}>
-              <ListItemText primary={text} />
+              <ListItemText
+                primary={text}
+                classes={{ primary: classes.listItemText }}
+              />
             </ListItem>
           );
         })}
@@ -97,7 +105,10 @@ const DrawerButton = () => {
             const { text, onClick } = item;
             return (
               <ListItem button key={text} onClick={onClick}>
-                <ListItemText primary={text} />
+                <ListItemText
+                  primary={text}
+                  classes={{ primary: classes.listItemText }}
+                />
               </ListItem>
             );
           })}
@@ -109,7 +120,10 @@ const DrawerButton = () => {
             const { text, onClick } = item;
             return (
               <ListItem button key={text} onClick={onClick}>
-                <ListItemText primary={text} />
+                <ListItemText
+                  primary={text}
+                  classes={{ primary: classes.listItemText }}
+                />
               </ListItem>
             );
           })}
@@ -121,7 +135,7 @@ const DrawerButton = () => {
   return (
     <React.Fragment key={"right"}>
       <Button onClick={toggleDrawer("right", true)}>
-        <MenuIcon />
+        <MenuIcon style={{ fontSize: "3rem" }} />
       </Button>
       <Drawer
         anchor={"right"}

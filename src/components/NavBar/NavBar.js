@@ -15,13 +15,8 @@ const Navbar = styled.nav`
   border-bottom: 1px solid #dedede;
   position: fixed;
   background: #ffffff;
+  z-index: 5;
 `;
-
-// const breakpoints = {
-//   desktop: "(min-width: 1025px)",
-//   tablet: "(min-width: 768px) and (max-width: 1024px)",
-//   phone: "(max-width: 767px)",
-// };
 
 const NavBar = () => {
   const breakPoint = useMediaQuery({

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { authService, firebaseInstance } from "../../fire_module/fireMain";
 import { useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 //Material UI 로그인 Form 관련 Imports
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -19,20 +19,27 @@ import Container from "@material-ui/core/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 
-const SocialLogin = styled.div`
+// styled-components
+const SocialLoginMixin = css`
+  padding: 1rem;
+  border: none;
+  background: #f7f7f7;
+  font-size: ${(props) => props.theme.fontSizes.base};
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SocialLoginSection = styled.div`
   display: flex;
 `;
 
-const GoogleLogin = styled.button`
-  padding: 1rem;
-  border: none;
-  background: #f7f7f7;
+const GoogleLoginSection = styled.button`
+  ${SocialLoginMixin}
 `;
 
-const GithubLogin = styled.button`
-  padding: 1rem;
-  border: none;
-  background: #f7f7f7;
+const GithubLoginSection = styled.button`
+  ${SocialLoginMixin}
 `;
 
 // Materaul UI 로그인 Form Design
@@ -42,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    height: "80vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -53,6 +61,12 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  title: {
+    fontSize: "3.4rem",
+  },
+  text: {
+    fontSize: "1.6rem",
   },
 }));
 
@@ -124,11 +138,6 @@ const LoginPage = () => {
 
   //Social 로그인 (Google, Github)
   const onSocialClick = async (event) => {
-    // console.log(event.currentTarget.name);
-    // const {
-    //   currentTarget: { name },
-    // } = event;
-
     const { name } = event.currentTarget;
 
     let provider;
@@ -154,10 +163,10 @@ const LoginPage = () => {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" className={classes.title}>
             Check Charging
           </Typography>
-          <Typography>(로그인)</Typography>
+          <Typography className={classes.text}>(로그인)</Typography>
           <form className={classes.form} onSubmit={handleLogin}>
             <TextField
               type="email"
@@ -172,6 +181,8 @@ const LoginPage = () => {
               autoFocus
               value={email}
               onChange={handleInput}
+              inputProps={{ className: classes.text }} // font size of input text
+              InputLabelProps={{ className: classes.text }} // font size of input label
             />
 
             <TextField
@@ -186,11 +197,19 @@ const LoginPage = () => {
               autoComplete="current-password"
               value={password}
               onChange={handleInput}
+              inputProps={{ className: classes.text }} // font size of input text
+              InputLabelProps={{ className: classes.text }} // font size of input label
             />
 
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="아이디 저장"
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  style={{ transform: "scale(1.5)", paddingLeft: "1.5rem" }}
+                />
+              }
+              label={<span style={{ fontSize: "1.4rem" }}>아이디 저장</span>}
             />
 
             <Button
@@ -200,28 +219,31 @@ const LoginPage = () => {
               color="primary"
               className={classes.submit}
             >
-              로그인
+              <span className={classes.text}>로그인</span>
             </Button>
           </form>
           <Grid container>
             <Grid item xs>
-              {/* TODO 비밀번호 찾기 페이지 만들기 */}
-              <Link to="/findaccount">비밀번호 찾기</Link>
+              <Link to="/findaccount" className={classes.text}>
+                비밀번호 찾기
+              </Link>
             </Grid>
             <Grid item>
-              <Link to="/register">회원가입</Link>
+              <Link to="/register" className={classes.text}>
+                회원가입
+              </Link>
             </Grid>
           </Grid>
           <br />
-          <h4>소셜 로그인</h4>
-          <SocialLogin>
-            <GoogleLogin name="google" onClick={onSocialClick}>
+          <h4 className={classes.text}>Social Login</h4>
+          <SocialLoginSection>
+            <GoogleLoginSection name="google" onClick={onSocialClick}>
               <FontAwesomeIcon icon={faGoogle} size="2x" />
-            </GoogleLogin>
-            <GithubLogin name="github" onClick={onSocialClick}>
+            </GoogleLoginSection>
+            <GithubLoginSection name="github" onClick={onSocialClick}>
               <FontAwesomeIcon icon={faGithub} size="2x" />
-            </GithubLogin>
-          </SocialLogin>
+            </GithubLoginSection>
+          </SocialLoginSection>
         </div>
       </Container>
     </>

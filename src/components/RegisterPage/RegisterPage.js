@@ -9,7 +9,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -23,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    height: "80vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -34,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  title: {
+    fontSize: "3.4rem",
+  },
+  text: {
+    fontSize: "1.6rem",
   },
 }));
 
@@ -112,14 +118,15 @@ const RegisterPage = () => {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" className={classes.title}>
             Check Charging
           </Typography>
-          <Typography>(회원가입)</Typography>
+          <Typography className={classes.text}>(회원가입)</Typography>
           <form className={classes.form} onSubmit={handleCreateAccount}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  type="email"
                   variant="outlined"
                   required
                   fullWidth
@@ -130,28 +137,40 @@ const RegisterPage = () => {
                   autoFocus
                   value={email}
                   onChange={handleInput}
+                  inputProps={{ className: classes.text }} // font size of input text
+                  InputLabelProps={{ className: classes.text }} // font size of input label
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  type="password"
                   variant="outlined"
                   required
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
                   id="password"
                   autoComplete="current-password"
                   value={password}
                   onChange={handleInput}
+                  inputProps={{ className: classes.text }} // font size of input text
+                  InputLabelProps={{ className: classes.text }} // font size of input label
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
+                    <Checkbox
+                      value="allowExtraEmails"
+                      color="primary"
+                      style={{ transform: "scale(1.5)", paddingLeft: "1.5rem" }}
+                    />
                   }
-                  label="이메일로 이벤트 관련 소식을 받고 싶습니다."
+                  label={
+                    <span style={{ fontSize: "1.4rem" }}>
+                      이메일로 이벤트 관련 소식을 받고 싶습니다.
+                    </span>
+                  }
                 />
               </Grid>
             </Grid>
@@ -162,11 +181,11 @@ const RegisterPage = () => {
               color="primary"
               className={classes.submit}
             >
-              회원가입
+              <span className={classes.text}>회원가입</span>
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2">
+                <Link to="/login" variant="body2" className={classes.text}>
                   이미 계정이 있으신가요? 로그인 하기
                 </Link>
               </Grid>

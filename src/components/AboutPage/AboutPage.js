@@ -1,10 +1,18 @@
 import React from "react";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  font-size: ${(props) => props.theme.fontSizes.titleSize};
+`;
+const P = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.base};
+`;
 
 const AboutPage = () => {
   return (
-    <div style={{ background: "gray" }}>
-      <h2 style={{ padding: "10px" }}>여기는 about 페이지 입니다.</h2>
-      <p>
+    <div>
+      <Title>여기는 about 페이지 입니다.</Title>
+      <P>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
         commodi corporis, perspiciatis id numquam recusandae esse aliquam
         dolorum pariatur deserunt animi fugit expedita non odit. Repudiandae
@@ -60,10 +68,10 @@ const AboutPage = () => {
         consequuntur amet nostrum, omnis culpa! Ex excepturi modi labore alias
         voluptates dolorem quia itaque, natus praesentium sint, magni eos error
         magnam, similique hic atque tempore?
-      </p>
+      </P>
 
       <hr />
-      <p>
+      <P>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis impedit
         porro dolorem, nihil suscipit quos blanditiis, nemo soluta debitis
         assumenda dignissimos nulla optio voluptate eos! Aspernatur voluptatem
@@ -109,9 +117,9 @@ const AboutPage = () => {
         ut accusamus sed rem consequatur molestiae? Recusandae quia, et
         assumenda, rerum rem laudantium laborum pariatur voluptatum illo,
         consequuntur ipsa!
-      </p>
+      </P>
       <hr />
-      <p>
+      <P>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
         consectetur adipisci tenetur numquam vitae eum iusto quae alias sunt?
         Delectus, velit sed libero commodi facere molestiae eos accusamus,
@@ -221,7 +229,7 @@ const AboutPage = () => {
         blanditiis ipsum earum assumenda eveniet? Earum corporis, sit neque
         molestias debitis minima ab cum exercitationem consequatur ipsa
         asperiores, eum eligendi. Vero reiciendis illo at commodi!
-      </p>
+      </P>
     </div>
   );
 };

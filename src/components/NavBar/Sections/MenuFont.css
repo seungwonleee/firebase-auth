@@ -12,10 +12,3 @@
 .Logo-Font {
   font-family: "Roboto", sans-serif;
 }
-
-/* Logo 아이콘 설정 */
-.Logo-Icon {
-  color: green;
-  /* TODO 왜 font-size가 inline으로 작성시에만 적용되는지 확인하기 */
-  /* font-size: 50px; */
-}

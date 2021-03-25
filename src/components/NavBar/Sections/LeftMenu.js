@@ -5,37 +5,22 @@ import styled from "styled-components";
 import "./MenuFont.css";
 
 // styled-components
-const List = styled.ul`
-  display: flex;
-  list-style: none;
-  align-items: center;
-  padding-left: 1rem;
-`;
-
-const Item = styled.li`
-  padding-right: 0.3rem;
-  font-size: 17px;
-`;
-
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: black;
+  color: ${(props) => props.theme.colors.black};
+  display: flex;
+  padding: ${(props) => props.theme.paddings.xsmall};
+`;
+
+const Title = styled.h1`
+  font-size: ${(props) => props.theme.fontSizes.titleSize};
 `;
 
 const LeftMenu = () => {
   return (
     <StyledLink to="/">
-      <List>
-        <Item>
-          <BatteryCharging20Icon
-            className="Logo-Icon"
-            style={{ fontSize: "3rem" }}
-          />
-        </Item>
-        <Item>
-          <h2 className="Logo-Font">Check Charing</h2>
-        </Item>
-      </List>
+      <BatteryCharging20Icon style={{ fontSize: "4.8rem", color: "green" }} />
+      <Title className="Logo-Font">Check Charing</Title>
     </StyledLink>
   );
 };

@@ -1,21 +1,31 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Routes from "./Routes/Routes";
 import { authService } from "./fire_module/fireMain";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleLoginState } from "./features/auth/authSlice";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import theme from "./Theme/theme";
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 
+// styled-components
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     padding:0;
     margin:0;
+    font-size:10px;
   }
   a {
     text-decoration:none;
     color: #3F51B5;
   }
+`;
 
+const MainSection = styled.section`
+  background: #f7f7f7;
+  padding-top: 55px;
 `;
 
 const App = () => {
@@ -35,7 +45,15 @@ const App = () => {
   return (
     <div>
       <GlobalStyle />
-      <Routes />
+      <ThemeProvider theme={theme}>
+        <Router>
+          <NavBar />
+          <MainSection>
+            <Routes />
+          </MainSection>
+          <Footer />
+        </Router>
+      </ThemeProvider>
     </div>
   );
 };
