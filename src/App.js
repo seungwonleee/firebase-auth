@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration:none;
-    color: #A1A2A2;
+    color: #73797a;
   }
 `;
 

@@ -47,7 +47,7 @@ const verticalInterval = {
 const colors = {
   green: "#03C75A",
   hover: "#11a653",
-  link: "#A1A2A2",
+  link: "#73797a",
   black: "#000000",
   white: "#FFFFFF",
   gray: "#767676",

@@ -105,7 +105,6 @@ const RegisterPage = () => {
         break;
       default:
         break;
-      // TODO default 설정 어떻게 할지 고려하기
     }
   };
 

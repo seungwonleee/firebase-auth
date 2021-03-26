@@ -53,20 +53,56 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#03C75A",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  textField: {
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "light-gray",
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#03C75A",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#03C75A",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "black",
+    },
+    "&:hover .MuiOutlinedInput-input": {
+      color: "gray",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+      color: "black",
+    },
+    "& .MuiInputLabel-outlined": {
+      color: "gray",
+    },
+    "&:hover .MuiInputLabel-outlined": {
+      color: "gray",
+    },
+    "& .MuiInputLabel-outlined.Mui-focused": {
+      color: "gray",
+    },
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: "#03C75A",
+    "&:hover": {
+      background: "#11a653",
+    },
   },
   title: {
     fontSize: "3.4rem",
   },
   text: {
     fontSize: "1.6rem",
+  },
+  titleLink: {
+    color: "black",
   },
 }));
 
@@ -96,10 +132,9 @@ const LoginPage = () => {
         break;
       default:
         break;
-      // TODO default 설정 어떻게 할지 고려하기
     }
   };
-
+  //로그인하기
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -130,7 +165,7 @@ const LoginPage = () => {
             alert("없는 사용자 입니다.");
             break;
           case "auth/wrong-password":
-            alert("비밀번호가 틀렸습니다.");
+            alert("비밀번호를 다시 확인해주세요.");
             break;
         }
       });
@@ -163,9 +198,11 @@ const LoginPage = () => {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" className={classes.title}>
-            Check Charging
-          </Typography>
+          <Link to="/" className={classes.titleLink}>
+            <Typography component="h1" variant="h5" className={classes.title}>
+              Check Charging
+            </Typography>
+          </Link>
           <Typography className={classes.text}>(로그인)</Typography>
           <form className={classes.form} onSubmit={handleLogin}>
             <TextField
@@ -183,6 +220,7 @@ const LoginPage = () => {
               onChange={handleInput}
               inputProps={{ className: classes.text }} // font size of input text
               InputLabelProps={{ className: classes.text }} // font size of input label
+              className={classes.textField}
             />
 
             <TextField
@@ -199,13 +237,14 @@ const LoginPage = () => {
               onChange={handleInput}
               inputProps={{ className: classes.text }} // font size of input text
               InputLabelProps={{ className: classes.text }} // font size of input label
+              className={classes.textField}
             />
 
             <FormControlLabel
               control={
                 <Checkbox
                   value="remember"
-                  color="primary"
+                  color="default"
                   style={{ transform: "scale(1.5)", paddingLeft: "1.5rem" }}
                 />
               }
