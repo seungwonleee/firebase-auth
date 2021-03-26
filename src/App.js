@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Routes from "./Routes/Routes";
 import { authService } from "./fire_module/fireMain";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleLoginState } from "./features/auth/authSlice";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import theme from "./Theme/theme";
-import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 // styled-components
@@ -22,11 +19,6 @@ const GlobalStyle = createGlobalStyle`
     text-decoration:none;
     color: #3F51B5;
   }
-`;
-
-const MainSection = styled.section`
-  background: #f7f7f7;
-  padding-top: 55px;
 `;
 
 const App = () => {
@@ -45,16 +37,13 @@ const App = () => {
 
   return (
     <div>
+      {/* 전역 스타일 지정해주는 컴포넌트 */}
       <GlobalStyle />
+      {/* 페이지 이동시 Scroll 위치 상단 고정 컴포넌트*/}
+      <ScrollToTop />
+
       <ThemeProvider theme={theme}>
-        <Router>
-          <NavBar />
-          <MainSection>
-            <ScrollToTop />
-            <Routes />
-          </MainSection>
-          <Footer />
-        </Router>
+        <Routes />
       </ThemeProvider>
     </div>
   );
