@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "80vh",
+    height: "100vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.6rem",
   },
 }));
-//TODO 오류 코드 수정하기
+
 const FindAccountPage = () => {
   //redux로 로그인 상태 체크
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -58,38 +58,52 @@ const FindAccountPage = () => {
 
   const handleFindAccount = async (event) => {
     event.preventDefault();
-    var actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be in the authorized domains list in the Firebase Console.
-      url: "localhost:3000/",
-      // This must be true.
-      handleCodeInApp: true,
-      iOS: {
-        bundleId: "com.example.ios",
-      },
-      android: {
-        packageName: "com.example.android",
-        installApp: true,
-        minimumVersion: "12",
-      },
-      dynamicLinkDomain: "example.page.link",
-    };
 
     await authService
-      .sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(() => {
-        // The link was successfully sent. Inform the user.
-        // Save the email locally so you don't need to ask the user for it again
-        // if they open the link on the same device.
-        window.localStorage.setItem("emailForSignIn", email);
-        // ...
+      .sendPasswordResetEmail(email)
+      .then(function () {
+        // Password reset email sent.
+        alert("해당 이메일로 비밀번호 관련 이메일을 보냈습니다.");
       })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log("계정찾기=>", errorCode);
-        console.log("계정찾기=>", errorMessage);
-        // ...
+      .catch(function (error) {
+        // Error occurred. Inspect error.code.
+        // 에러 코드에 따라 처리 필요
+        // 만약 에러코드 find2 와 함께 문의가 오면, 문제가 되는 해당 이메일의 도메인 주소를 확인하고 firebase 콘솔로가서 Authentication 메뉴 ==> Sign-in-method 탭 ==> 아래에 승인된 도메인 추가하기
+        // console.log(error);
+        // console.log(error.code);
+        switch (error.code) {
+          case "auth/user-not-found":
+            alert("가입된 계정이 아니거나 삭제되었을 수 있습니다.");
+            break;
+          case "auth/unauthorized-continue-uri":
+            alert(
+              "에러 코드와 함께 관리자에게 문의가 필요합니다. 에러코드: find2"
+            );
+            break;
+          case "auth/invalid-continue-uri":
+            alert(
+              "에러 코드와 함께 관리자에게 문의가 필요합니다. 에러코드: find3"
+            );
+            break;
+          case "auth/missing-ios-bundle-id":
+            alert(
+              "에러 코드와 함께 관리자에게 문의가 필요합니다. 에러코드: find4"
+            );
+            break;
+          case "auth/missing-continue-uri":
+            alert(
+              "에러 코드와 함께 관리자에게 문의가 필요합니다. 에러코드: find5"
+            );
+            break;
+          case "auth/missing-android-pkg-name":
+            alert(
+              "에러 코드와 함께 관리자에게 문의가 필요합니다. 에러코드: find6"
+            );
+            break;
+          case "auth/invalid-email":
+            alert("잘못된 형식의 이메일 주소입니다.");
+            break;
+        }
       });
   };
   return (
