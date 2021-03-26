@@ -45,10 +45,12 @@ const verticalInterval = {
 };
 
 const colors = {
+  green: "#03C75A",
+  hover: "#11a653",
+  link: "#A1A2A2",
   black: "#000000",
   white: "#FFFFFF",
   gray: "#767676",
-  green: "#03C75A",
   DarkMode: "#222222",
 };
 

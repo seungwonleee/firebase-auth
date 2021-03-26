@@ -26,20 +26,56 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#03C75A",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
+  textField: {
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "light-gray",
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#03C75A",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#03C75A",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "black",
+    },
+    "&:hover .MuiOutlinedInput-input": {
+      color: "gray",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+      color: "black",
+    },
+    "& .MuiInputLabel-outlined": {
+      color: "gray",
+    },
+    "&:hover .MuiInputLabel-outlined": {
+      color: "gray",
+    },
+    "& .MuiInputLabel-outlined.Mui-focused": {
+      color: "gray",
+    },
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: "#03C75A",
+    "&:hover": {
+      background: "#11a653",
+    },
   },
   title: {
     fontSize: "3.4rem",
   },
   text: {
     fontSize: "1.6rem",
+  },
+  titleLink: {
+    color: "black",
   },
 }));
 
@@ -118,9 +154,11 @@ const RegisterPage = () => {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" className={classes.title}>
-            Check Charging
-          </Typography>
+          <Link to="/" className={classes.titleLink}>
+            <Typography component="h1" variant="h5" className={classes.title}>
+              Check Charging
+            </Typography>
+          </Link>
           <Typography className={classes.text}>(회원가입)</Typography>
           <form className={classes.form} onSubmit={handleCreateAccount}>
             <Grid container spacing={2}>
@@ -139,6 +177,7 @@ const RegisterPage = () => {
                   onChange={handleInput}
                   inputProps={{ className: classes.text }} // font size of input text
                   InputLabelProps={{ className: classes.text }} // font size of input label
+                  className={classes.textField}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -155,6 +194,7 @@ const RegisterPage = () => {
                   onChange={handleInput}
                   inputProps={{ className: classes.text }} // font size of input text
                   InputLabelProps={{ className: classes.text }} // font size of input label
+                  className={classes.textField}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -162,7 +202,7 @@ const RegisterPage = () => {
                   control={
                     <Checkbox
                       value="allowExtraEmails"
-                      color="primary"
+                      color="default"
                       style={{ transform: "scale(1.5)", paddingLeft: "1.5rem" }}
                     />
                   }
