@@ -10,6 +10,7 @@ const StyledLink = styled(Link)`
   color: ${(props) => props.theme.colors.black};
   display: flex;
   padding: ${(props) => props.theme.paddings.xsmall};
+  align-items: center;
 `;
 
 const Title = styled.h1`

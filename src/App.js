@@ -8,6 +8,7 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import theme from "./Theme/theme";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 // styled-components
 const GlobalStyle = createGlobalStyle`
@@ -49,6 +50,7 @@ const App = () => {
         <Router>
           <NavBar />
           <MainSection>
+            <ScrollToTop />
             <Routes />
           </MainSection>
           <Footer />

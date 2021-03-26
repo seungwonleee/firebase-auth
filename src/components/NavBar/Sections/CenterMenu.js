@@ -12,6 +12,9 @@ const List = styled.ul`
 const Item = styled.li`
   padding: ${(props) => props.theme.paddings.xlarge};
   font-size: ${(props) => props.theme.fontSizes.small};
+  &:hover {
+    color: green;
+  }
 `;
 
 const StyledLink = styled(Link)`
