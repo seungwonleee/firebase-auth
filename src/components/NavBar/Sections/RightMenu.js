@@ -33,6 +33,7 @@ const RightMenu = () => {
     // TODO reload 하지않으면 Auth 상태에 따라 메뉴가 바뀌지 않음 / indexdDB 저장 내용은 삭제됨
     window.location.reload(true);
   };
+
   return (
     <>
       {isLoggedIn ? (

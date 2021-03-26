@@ -48,7 +48,7 @@ const colors = {
   black: "#000000",
   white: "#FFFFFF",
   gray: "#767676",
-  success: "#44944d",
+  green: "#03C75A",
   DarkMode: "#222222",
 };
 
