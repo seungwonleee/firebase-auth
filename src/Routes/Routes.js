@@ -7,6 +7,7 @@ import RegisterPage from "../components/RegisterPage/RegisterPage";
 import LoginPage from "../components/LoginPage/LoginPage";
 import MyPage from "../components/MyPage/MyPage";
 import FindAccountPage from "../components/FindAccountPage/FindAccountPage";
+import NoMatchPage from "../components/NoMatchPage/NoMatchPage";
 
 const Routes = () => {
   return (
@@ -17,6 +18,7 @@ const Routes = () => {
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/mypage" component={MyPage} />
       <Route exact path="/findaccount" component={FindAccountPage} />
+      <Route path="*" component={NoMatchPage} />
     </Switch>
   );
 };
